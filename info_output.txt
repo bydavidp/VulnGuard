@@ -1,0 +1,32 @@
+Traceback (most recent call last):
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "C:\Users\dpala\Documents\Python\Cibersecurity\Vunerabilidad telefono\VulnGuard\src\main.py", line 34, in <module>
+    main()
+  File "C:\Users\dpala\Documents\Python\Cibersecurity\Vunerabilidad telefono\VulnGuard\src\main.py", line 30, in main
+    cli()
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\core.py", line 1514, in __call__
+    return self.main(*args, **kwargs)
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\core.py", line 1435, in main
+    rv = self.invoke(ctx)
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\core.py", line 1902, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\core.py", line 1298, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\core.py", line 853, in invoke
+    return callback(*args, **kwargs)
+  File "C:\Users\dpala\Documents\Python\Cibersecurity\Vunerabilidad telefono\VulnGuard\src\cli\cli.py", line 242, in info
+    click.echo(build_banner())
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\utils.py", line 274, in echo
+    file = _default_text_stdout()
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\_compat.py", line 597, in func
+    rv = wrapper_func()
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\_compat.py", line 345, in get_text_stdout
+    rv = _get_windows_console_stream(sys.stdout, encoding, errors)
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\_winconsole.py", line 283, in _get_windows_console_stream
+    or not _is_console(f)
+  File "C:\Users\dpala\AppData\Local\Programs\Python\Python310\lib\site-packages\click\_winconsole.py", line 268, in _is_console
+    fileno = f.fileno()
+ValueError: I/O operation on closed file
