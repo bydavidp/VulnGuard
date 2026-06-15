@@ -1,0 +1,46 @@
+# VulnGuard .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reports (generated)
+reports/*
+!reports/.gitkeep
+
+# Logs
+*.log
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+
+# Mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
