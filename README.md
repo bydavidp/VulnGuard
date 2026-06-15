@@ -256,3 +256,6 @@ Las contribuciones son bienvenidas. Por favor:
 3. Commit tus cambios (`git commit -m 'feat: add amazing feature'`)
 4. Push a la rama (`git push origin feature/amazing-feature`)
 5. Abre un Pull Request
+
+**David Palacios**  
+Repositorio: [VulnGuard](https://github.com/bydavidp/VulnGuard)
