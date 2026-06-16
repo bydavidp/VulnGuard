@@ -45,6 +45,7 @@ class CheckStatus(Enum):
     ERROR = auto()
     SKIPPED = auto()
     WARNING = auto()
+    INFO = auto()
 
     def __str__(self) -> str:
         return self.name

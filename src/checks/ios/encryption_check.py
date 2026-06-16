@@ -22,12 +22,34 @@ class IosEncryptionCheck(SecurityCheck):
     description = "Verifica que el cifrado por hardware y la protección de datos estén activos en iOS"
     severity = Severity.HIGH
 
-    # Dispositivos que NO soportan cifrado por hardware
-    UNENCRYPTED_DEVICES = [
-        "iPhone1", "iPhone2", "iPhone3,1", "iPhone3,3",
-        "iPod1,1", "iPod2,1", "iPod3,1", "iPod4,1",
-        "iPad1,1",
-    ]
+    # Dispositivos que NO soportan cifrado por hardware (modelos exactos)
+    UNENCRYPTED_DEVICES = {
+        "iPhone1,1", "iPhone1,2",  # iPhone original, iPhone 3G
+        "iPod1,1", "iPod2,1", "iPod3,1", "iPod4,1",  # iPod touch 1ª-4ª gen
+        "iPad1,1",  # iPad 1ª gen
+    }
+
+    # Versión mínima de iOS desde la que todo dispositivo tiene cifrado garantizado
+    MIN_IOS_VERSION_FOR_ENCRYPTION = (5, 0)
+
+    def _is_old_device(self, product_type: str, ios_version: str) -> bool:
+        """Verifica si es un dispositivo sin cifrado por hardware.
+        
+        Usa coincidencia exacta de modelo + versión de iOS como respaldo.
+        Todos los dispositivos con iOS >= 5.0 tienen cifrado por hardware.
+        """
+        if product_type in self.UNENCRYPTED_DEVICES:
+            return True
+        # Si podemos obtener la versión de iOS, los modernos tienen cifrado
+        try:
+            parts = ios_version.split(".")
+            major, minor = int(parts[0]), int(parts[1]) if len(parts) > 1 else 0
+            if (major, minor) >= self.MIN_IOS_VERSION_FOR_ENCRYPTION:
+                return False  # Versión moderna → cifrado garantizado
+        except (ValueError, IndexError):
+            pass
+        # Fallback: solo marcar como antiguo si el modelo ESTÁ en la lista exacta
+        return False
 
     def _run(self) -> SecurityCheckResult:
         device_info = {}
@@ -36,11 +58,12 @@ class IosEncryptionCheck(SecurityCheck):
 
         product_type = device_info.get("ProductType", "")
         model = device_info.get("ProductModel", "")
+        ios_version = device_info.get("ProductVersion", "")
         passcode_protected = device_info.get("PasswordProtected", "false")
         hardware_encrypt = device_info.get("HardwareEncryption", "")
 
         # Verificar si el dispositivo soporta cifrado por hardware
-        is_old_device = any(product_type.startswith(p) for p in self.UNENCRYPTED_DEVICES)
+        is_old_device = self._is_old_device(product_type, ios_version)
 
         if is_old_device:
             status = CheckStatus.FAILED

@@ -33,10 +33,10 @@ class IOSVersionCheck(SecurityCheck):
     }
 
     def _run(self) -> SecurityCheckResult:
-        ios_version = self.adb.get_property("ProductVersion") if hasattr(self.adb, 'get_property') else ""
-        build = self.adb.get_property("BuildVersion") if hasattr(self.adb, 'get_property') else ""
-        model = self.adb.get_property("ProductType") if hasattr(self.adb, 'get_property') else ""
-        device_name = self.adb.get_property("DeviceName") if hasattr(self.adb, 'get_property') else ""
+        ios_version = self.device.get_property("ProductVersion") if hasattr(self.device, 'get_property') else ""
+        build = self.device.get_property("BuildVersion") if hasattr(self.device, 'get_property') else ""
+        model = self.device.get_property("ProductType") if hasattr(self.device, 'get_property') else ""
+        device_name = self.device.get_property("DeviceName") if hasattr(self.device, 'get_property') else ""
 
         if not ios_version:
             return self._result(

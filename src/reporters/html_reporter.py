@@ -65,10 +65,10 @@ class HtmlReporter(BaseReporter):
         html = self._build_html()
 
         if output_path:
-            path = Path(output_path)
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(html, encoding="utf-8")
-            logger.info(f"Reporte HTML guardado: {path}")
+            filepath = Path(output_path)
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+            filepath.write_text(html, encoding="utf-8")
+            logger.info(f"Reporte HTML guardado: {filepath}")
         else:
             # Generar nombre automático
             reports_dir = Path("reports")
